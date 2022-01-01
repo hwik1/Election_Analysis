@@ -45,19 +45,19 @@ Here are the steps I followed to build my code:
   2. Defined variables largest_county to get the name of the county with the most votes and county_voter_turnout to get the number of votes for that county
   3. In the for loop, added county_name = row[1] to get the county name from each row
   
-     a. Note: County is the second column of the CSV (ballot ID, county, candidate), but I used one as the index above because the index of columns start at 0 (ballot ID index 0, county index 1, candidate index 2)
+     **Note:** County is the second column of the CSV (ballot ID, county, candidate), but I used one as the index above because the index of columns start at 0 (ballot ID index 0, county index 1, candidate index 2)
      
   4. Added an if statement to determine if the county_name was not already in the county_list
 
-     a. Note: Used "not in" logical operator because if it is true that the county name is not in the list, then I want to add it. If it is false, then the second part of the  code to add the county name to the list wouldn't activate, which avoids duplicates
+     **Note:** Used "not in" logical operator because if it is true that the county name is not in the list, then I want to add it. If it is false, then the second part of the  code to add the county name to the list wouldn't activate, which avoids duplicates
      
  5. If my statement from 4 was true (county_name not in county_list), then I added county_list.append(county_name) to add the county to the list I defined in step 1
  6. If my statement from 4 was true and after the county name was added to the list for the first time, I wrote code to begin tracking the votes for that county by setting the vote count equal to zero. This is the end of this if statement.
  7. Added one to the vote count for that county
  
-    a. Note: If this is the first time the loop encounters this county name, that will mean the county has one vote after going through the if statement. If the county was already in the list, then it will skip the if statement, but add one to the previous count.
+    **Note:** If this is the first time the loop encounters this county name, that will mean the county has one vote after going through the if statement. If the county was already in the list, then it will skip the if statement, but add one to the previous count.
     
-8.     
+8. Created a for loop to get the    
     
     
 
