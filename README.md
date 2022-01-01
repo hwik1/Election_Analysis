@@ -40,24 +40,35 @@ To provide the requested information for challenge, I started by creating an out
 
 In the first part of the analysis for the module, the county data existed in the CSV, but it was not used in the code. Writing the outline made it pretty clear that I could use similar code from calculating the votes, percentage, and winner _by candidate_, but update the code to reference the _county_ instead.
 
-Here are the steps I followed to build my code:
-  1. Created a county_list list and county_votes dictionary (both were empty because the for loop would fill them in as it read the CSV later)
+### Steps to Building the Code
+Here is a summary of the steps I followed to build the code for the challenge, including learnings or explanations of why I built the code how I did:
+
+  1. Created a county_list list and county_votes dictionary (both were empty because the for loop would fill them in as it read through the rows of the CSV later)
   2. Defined variables largest_county to get the name of the county with the most votes and county_voter_turnout to get the number of votes for that county
   3. In the for loop, added county_name = row[1] to get the county name from each row
   
-     **Note:** County is the second column of the CSV (ballot ID, county, candidate), but I used one as the index above because the index of columns start at 0 (ballot ID index 0, county index 1, candidate index 2)
+     **Note:** County is the second column of the CSV (ballot ID, county, candidate), but I used one as the index above because the index of columns start at 0 (ballot ID: index 0, county: index 1, candidate: index 2)
      
   4. Added an if statement to determine if the county_name was not already in the county_list
 
-     **Note:** Used "not in" logical operator because if it is true that the county name is not in the list, then I want to add it. If it is false, then the second part of the  code to add the county name to the list wouldn't activate, which avoids duplicates
+     **Note:** Used "not in" logical operator because if it is true that the county name is not in the list, then I want to add it. If it is false, then the second part of the  code that adds the county name to the list wouldn't activate, which avoids duplicates
      
  5. If my statement from 4 was true (county_name not in county_list), then I added county_list.append(county_name) to add the county to the list I defined in step 1
- 6. If my statement from 4 was true and after the county name was added to the list for the first time, I wrote code to begin tracking the votes for that county by setting the vote count equal to zero. This is the end of this if statement.
+ 6. If my statement from 4 was true and the county name was added to the list for the first time, I wrote code to begin tracking the votes for that county by setting the vote count equal to zero. This is the end of the if statement.
  7. Added one to the vote count for that county
  
-    **Note:** If this is the first time the loop encounters this county name, that will mean the county has one vote after going through the if statement. If the county was already in the list, then it will skip the if statement, but add one to the previous count.
+    **Note:** If this is the first time the loop encounters this county name, that will mean the county has one vote after going through the if statement (1+0). If the county was already in the list, then it will skip the if statement, but add one to the previous count.
     
-8. Created a for loop to get the    
+8. Created a for loop to get the count of votes and percentage of total votes for each county, which I then printed/saved to the text file in a similar format to the candidate results
+
+   i.e. county name: percentage of total votes to the tenth (total county votes with comma formatting)
+   **or** Jefferson: 10.5% (38,855)
+   
+9. Wrote an if statement to figure out which county had the largest voter turnout using if(total_county_votes > county_voter_turnout) and setting largest_county equal to county_name and county_voter turnout equal to total_county_votes
+
+   **Note:** Since this is in the for loop and the county_voter_turnout starts at zero, the first time the code runs on Jefferson, the new county_voter_turnout would be set to Jefferson's total county votes of 38,855 because that is greater than 0. The next time through on Denver, county_voter_turnout would reset to 306,055, which is Denver's voter turnout because it is greater than Jefferson's. On the third time through, Arapahoe's 24,801 turnout is smaller than the current county_voter_turnout, so the if statement is not activated and Denver remains as the largest_county and county_voter_turnout.
+   
+10. Created a summary of the largest turnout county name and vote count with formatting using f-strings in the same style as the winning candidate and printed/wrote to the text file
     
 ### Issues Encountered
 Although the code was fairly easy to replicate for counties instead of candidates, I did run into a few challenges:
