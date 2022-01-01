@@ -15,7 +15,7 @@ The final code and results were commited to a Git Hub repository.
 - Data Source: election_results.csv (provided)
 - Software: Python 3.9.9, Visual Studio Code 1.63.2, Git Bash 2.34.1.windows.1
 
-## Summary
+## Module Summary
 After building code to analyze the data, a summary of the results was written to a text file, as pictured below:
 
 ![image](https://user-images.githubusercontent.com/93058069/147860131-67e53eeb-33f0-49d1-8ce1-d7730c80ee75.png)
@@ -59,6 +59,19 @@ Here are the steps I followed to build my code:
     
 8. Created a for loop to get the    
     
-    
+### Issues Encountered
+Although the code was fairly easy to replicate for counties instead of candidates, I did run into a few challenges:
+
+  * When I downloaded and saved the PyPoll_Challenge code, I saved it in the wrong 'Resources' folder from the earlier VBA challenge. That caused the IOError described in module 3.4.3 because that version of the Resources folder didn't have an Analysis folder. I had to rewrite the file_to_save path in line 11 with the direct path instead of the relative path because I couldn't get it to work otherwise.
+
+ * There were a lot of variables being used by the end of the code where I needed to write the if statement to determine the county with the highest voter turnout and the vote count and I started to get confused. At first, I thought I could use total_county_votes > winning_count (using the same variable as the candidate with the most votes), but that gave me an incorrect output. As you can see in the first picture below, that code said Arapahoe county had the highest turnout with 24,801 votes, but I could see that Denver had the most with 306,055. After troubleshooting the error, I updated the if statement to read if total_county_votes > county_voter_turnout because that was the variable I had previously defined to hold the votes for the largest turnout county and that corrected the issue, as seen in the second picture below.
+
+_Incorrect if statement output_
+
+![image](https://user-images.githubusercontent.com/93058069/147861982-bae083e2-a2b0-4115-8f54-c87ba65e411f.png)
+
+_Corrected if statement output_
+
+![image](https://user-images.githubusercontent.com/93058069/147862026-ae4f63ef-811c-4cbc-953a-248bd35a0ba7.png)
 
 ## Challenge Summary
