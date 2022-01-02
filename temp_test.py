@@ -5,4 +5,3 @@ if temperature > 80:
 else:
     print("Open the windows.")
 
-dir(int)    
