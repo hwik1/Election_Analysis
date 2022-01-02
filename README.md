@@ -44,7 +44,10 @@ Here is a summary of the steps I followed to build the code for the challenge, i
   2. Defined variables largest_county to get the name of the county with the most votes and county_voter_turnout to get the number of votes for that county
   3. In the for loop, added county_name = row[1] to get the county name from each row
   
-     **Note:** County is the second column of the CSV (ballot ID, county, candidate), but I used one as the index above because the index of columns start at 0 (ballot ID: index 0, county: index 1, candidate: index 2)
+     **Note:** County is the second column of the CSV (as seen below), but I used 1 as the index above because the index of columns start at 0 (ballot ID: index 0, county: index 1, candidate: index 2)
+     
+     ![image](https://user-images.githubusercontent.com/93058069/147863576-c56da929-3af3-4c41-987c-c8b88d85850a.png)
+
      
   4. Added an if statement to determine if the county_name was not already in the county_list
 
@@ -52,9 +55,14 @@ Here is a summary of the steps I followed to build the code for the challenge, i
      
  5. If my statement from 4 was true (county_name not in county_list), then I added county_list.append(county_name) to add the county to the list I defined in step 1
  6. If my statement from 4 was true and the county name was added to the list for the first time, I wrote code to begin tracking the votes for that county by setting the vote count equal to zero. This is the end of the if statement.
- 7. Added one to the vote count for that county
+
+_Code for Steps 5 & 6_
+
+![image](https://user-images.githubusercontent.com/93058069/147863595-5c79dcf3-f40f-4e16-9b5e-ecdbf9224f70.png)
+
+7. Added one to the vote count for that county
  
-    **Note:** If this is the first time the loop encounters this county name, that will mean the county has one vote after going through the if statement (1+0). If the county was already in the list, then it will skip the if statement, but add one to the previous count.
+   **Note:** If this is the first time the loop encounters this county name, that will mean the county has one vote after going through the if statement (1+0). If the county was already in the list, then it will skip the if statement, but add one to the previous count.
     
 8. Created a for loop to get the count of votes and percentage of total votes for each county, which I then printed/saved to the text file in a similar format to the candidate results
 
@@ -65,6 +73,10 @@ Here is a summary of the steps I followed to build the code for the challenge, i
 
    **Note:** Since this is in the for loop and the county_voter_turnout starts at zero, the first time the code runs on Jefferson, the new county_voter_turnout would be set to Jefferson's total county votes of 38,855 because that is greater than 0. The next time through on Denver, county_voter_turnout would reset to 306,055, which is Denver's voter turnout because it is greater than Jefferson's. On the third time through, Arapahoe's 24,801 turnout is smaller than the current county_voter_turnout, so the if statement is not activated and Denver remains as the largest_county and county_voter_turnout.
    
+_Code for Step 9_   
+
+![image](https://user-images.githubusercontent.com/93058069/147863609-4bfb8314-22eb-4d53-b1ef-21250c0f6623.png)
+   
 10. Created a summary of the largest turnout county name with formatting using f-strings in the same style as the winning candidate and printed/wrote to the text file
     
 ### Issues Encountered
@@ -72,7 +84,7 @@ Although the code was fairly easy to replicate for counties instead of candidate
 
   * When I downloaded and saved the PyPoll_Challenge file, I saved it in the wrong 'Resources' folder from the earlier VBA challenge. That caused the IOError described in module 3.4.3 because that version of the Resources folder didn't have an Analysis folder. I had to rewrite the file_to_save path in line 11 with the direct path to a new election_results.txt file instead of the relative path because I couldn't get it to work otherwise.
 
- * There were a lot of variables being used by the end of the code where I needed to write the if statement to determine the county with the highest voter turnout and the vote count and I started to get confused. At first, I thought I could use total_county_votes > winning_count (using the same variable as the candidate with the most votes), but that gave me an incorrect output. As you can see in the first picture below, that code said Arapahoe county had the highest turnout with 24,801 votes, but I could see that Denver had the most with 306,055. After troubleshooting the error, I updated the if statement to read if total_county_votes > county_voter_turnout because that was the variable I had previously defined to hold the votes for the largest turnout county and that corrected the issue, as seen in the second picture below.
+ * There were a lot of variables being used by the end of the script where I needed to write the if statement to determine the county with the highest voter turnout and the vote count and I started to get confused. At first, I thought I could use total_county_votes > winning_count (using the same variable as the candidate with the most votes), but that gave me an incorrect output. As you can see in the first picture below, that code said Arapahoe county had the highest turnout with 24,801 votes, but I could see that Denver had the most with 306,055. I realized that winning_count = 0 at that point in the script, so it cycled through all of the counties and listed the last as the output because all had voter turnout greater than zero. After troubleshooting the error, I updated the if statement to read if total_county_votes > county_voter_turnout because that was the variable I had previously defined to hold the votes for the largest turnout county and that corrected the issue, as seen in the second picture below.
 
 _Incorrect if statement output_
 
@@ -123,6 +135,6 @@ ___
 ### Election-Audit Summary
 This election audit successfully demonstrated a workable Python script that can read tabulated vote data from a CSV and print an analysis to a text file. The output includes results for total votes and vote percentage by candidate and county, as well as the winning candidate and the county with the largest voter turnout. (Note: for this analysis, voter turnout is defined by absolute number of voters per county - not number of votes compared to the eligble voter population.) This script could be used for any election with slight modifications to fit the scenario, like the two options described below:
 
- 1. If you want to use this script for a national election, like the result of the popular vote for the presidential election, then you would want to modify the script to analyze turnout results by state instead of by county. The candidate calculations could stay the same, but the current script would yield too many county results that wouldn't be meaningful to the results for a national election like state would. You would not only need to modify your script, but would also need to ensure that the CSV file has state information for each vote. (The script could also be modified to calcuate the electoral college impact based on results by state, but that would require more changes.)
+ 1. If you want to use this script for a national election, like the result of the popular vote for the presidential election, then you would want to modify the script to analyze turnout results by state instead of by county. The candidate calculations could stay the same, but the current script would yield too many county results that wouldn't be meaningful in a national election like state results would. You would not only need to modify your script, but would also need to ensure that the CSV file has state information for each vote. (The script could also be modified to calcuate the electoral college impact based on results by state, but that would require even more changes.)
 
- 2. If you had an election with ranked choice voting, then you would need to modify the script to add up the total votes by candidate for the first ranked choice and then divide that by the total number of votes. Add an if statement to determine if a candidate received more than 50% of the vote, which would make them the winner if so. If not, you would need the script to eliminate the candidate with the lowest amount of votes and pull in the second choices for the voters that ranked the eliminated candidate first before re-running the votes/percentages for the remaining candidates. Use the if statement again to check if any candidate has a majority over 50% and repeat if necessary until a winner is declared.
+ 2. If you had an election with ranked choice voting, then you would need the script to add up the total votes by candidate for the first ranked choice and then divide that by the total number of votes (same as we have now, but the CSV would have extra columns with first, second, third, etc. choice). Add an if statement to determine if a candidate received more than 50% of the vote, which would make them the winner if so. If not, you would need the script to eliminate the candidate with the lowest amount of votes and pull in the second choices for those voters that ranked the eliminated candidate first before re-running the votes/percentages for the remaining candidates. Use the new if statement again to check if any candidate has a majority over 50% and repeat if necessary until a winner is declared.
