@@ -1,5 +1,5 @@
 # Election Analysis
-Module 3 Python polling repository and challenge analysis, completed by Hannah Wikum - January 2022
+Module 3 Python election audit repository and challenge analysis, completed by Hannah Wikum - January 2022
 
 ## Resources
 - Data Source: election_results.csv (provided)
@@ -24,19 +24,10 @@ For the challenge, I added to the initial analysis to provide a more comprehensi
   * County with the highest voter turnout
 
 The final results were printed to a text file. The code and text results were committed to a Git Hub repository.
-
-## Module Summary
-After building code to analyze the data, a summary of the results was written to a text file, as pictured below:
-
-![image](https://user-images.githubusercontent.com/93058069/147860131-67e53eeb-33f0-49d1-8ce1-d7730c80ee75.png)
-
-The total votes of 369,711 matched the number of rows (plus header) from the CSV file. There were three candidates who received votes: Charles Casper Stockham, Diana DeGette, and Raymon Anthony Doane. Raymon received only 3.1% of the vote, which put him in third. Charles received 23.0% of the vote for second place. Diana received 73.8% of the vote (272,892 votes), which makes her the clear winner. Because Diana had the most votes, her name, vote count, and vote percentage were printed at the bottom of the election results summary to clearly confirm the results.
-
 ___
 
 ## Challenge
-### Challenge Methodology
-To provide the requested information for challenge, I started by creating an outline of all the information I would need to code to find the results. This included the following  steps:
+To provide the requested information for the challenge, I started by creating an outline of all the information I would need to code to find the results. This included the following  steps:
 
   1. Get a list of all counties from the CSV file
   2. Count the number of votes by county
@@ -44,9 +35,9 @@ To provide the requested information for challenge, I started by creating an out
   4. Calculate the percentage of votes from each county compared to the total votes
   5. Write the results to the text file
 
-In the first part of the analysis for the module, the county data existed in the CSV, but it was not used in the code. Writing the outline made it pretty clear that I could use similar code from calculating the votes, percentage, and winner _by candidate_, but update the code to reference the _county_ instead.
+In the first part of the analysis for the module, the county data existed in the CSV, but it was not used in the script. Writing the outline made it pretty clear that I could use similar script from calculating the votes, percentage, and winner _by candidate_, but update the code to reference the _county_ instead.
 
-#### Steps to Building the Code
+### Steps to Building the Script
 Here is a summary of the steps I followed to build the code for the challenge, including learnings or explanations of why I built the code how I did:
 
   1. Created a county_list list and county_votes dictionary (both were empty because the for loop would fill them in as it read through the rows of the CSV later)
@@ -76,10 +67,10 @@ Here is a summary of the steps I followed to build the code for the challenge, i
    
 10. Created a summary of the largest turnout county name with formatting using f-strings in the same style as the winning candidate and printed/wrote to the text file
     
-#### Issues Encountered
+### Issues Encountered
 Although the code was fairly easy to replicate for counties instead of candidates, I did run into a few challenges:
 
-  * When I downloaded and saved the PyPoll_Challenge code, I saved it in the wrong 'Resources' folder from the earlier VBA challenge. That caused the IOError described in module 3.4.3 because that version of the Resources folder didn't have an Analysis folder. I had to rewrite the file_to_save path in line 11 with the direct path to a new election_results.txt file instead of the relative path because I couldn't get it to work otherwise.
+  * When I downloaded and saved the PyPoll_Challenge file, I saved it in the wrong 'Resources' folder from the earlier VBA challenge. That caused the IOError described in module 3.4.3 because that version of the Resources folder didn't have an Analysis folder. I had to rewrite the file_to_save path in line 11 with the direct path to a new election_results.txt file instead of the relative path because I couldn't get it to work otherwise.
 
  * There were a lot of variables being used by the end of the code where I needed to write the if statement to determine the county with the highest voter turnout and the vote count and I started to get confused. At first, I thought I could use total_county_votes > winning_count (using the same variable as the candidate with the most votes), but that gave me an incorrect output. As you can see in the first picture below, that code said Arapahoe county had the highest turnout with 24,801 votes, but I could see that Denver had the most with 306,055. After troubleshooting the error, I updated the if statement to read if total_county_votes > county_voter_turnout because that was the variable I had previously defined to hold the votes for the largest turnout county and that corrected the issue, as seen in the second picture below.
 
@@ -91,21 +82,47 @@ _Corrected if statement output_
 
 ![image](https://user-images.githubusercontent.com/93058069/147862026-ae4f63ef-811c-4cbc-953a-248bd35a0ba7.png)
 
+___
+
 ### Election-Audit Results
-After the election audit for the challenge was complete, here is a summary of the outcomes of the election (see Steps to Building code above for detail on how each was determined):
- * Total votes: 369,711
+After the election audit for the challenge was complete, here is a summary of the outcomes of the election (see Steps to Building the Script above for detail on how each was determined):
+ * Total votes:
+
+       369,711
+ 
  * Percent of total votes / vote count by county:
-       * Jefferson: 10.5% / 38,855
-       * Denver: 82.8% / 306,055
-       * Arapahoe: 6.7% / 24,801
- * County with the largest number of votes: Denver
+ 
+       Jefferson: 10.5% / 38,855
+
+       Denver: 82.8% / 306,055
+
+       Arapahoe: 6.7% / 24,801
+
+ * County with the largest number of votes:
+ 
+       Denver
+       
  * Percent of total votes / vote count by candidate:
-       * Charles Casper Stockham: 23.0% / 85,213
-       * Diana DeGette: 73.8% / 272,892
-       * Raymon Anthony Doane: 3.1% / 11,606
- * Winning candidate: Diana Degette (73.8% of total vote / 272,892 votes) 
+
+       Charles Casper Stockham: 23.0% / 85,213
+
+       Diana DeGette: 73.8% / 272,892
+
+       Raymon Anthony Doane: 3.1% / 11,606
+
+ * Winning candidate:
+ 
+       Diana DeGette (73.8% of total vote / 272,892 votes) 
+ 
+ Here is a picture of the text file output that includes the data summarized above:
+ 
+ ![image](https://user-images.githubusercontent.com/93058069/147863374-6230395b-c307-499d-aac7-d14cd8f852b7.png)
+
+___
 
 ### Election-Audit Summary
-This election audit successfully demonstrated a workable Python script that can read tabulated vote data from a CSV and print an analysis to a text file, which includes results for total votes and vote percentage by candidate and county, as well as the winning candidate and county with the largest voter turnout. (Note: for this analysis, voter turnout is defined by absolute number of voters per county - not number of votes compared to the eligble voter population.) This script could be used for any election with slight modifications to fit the scenario, like the two options described below:
- 1. If you want to use this script for a country-wide election, like the result of the popular vote for the Presidential election, then you would likely want to modify the code to analyze by state instead of by county. The candidate calculations could stay the same, but there would be so many county results with the current script and it wouldn't be meaningful for a national election. You would not only need to modify your script, but would also need to ensure that the CSV file has state information.
- 2. If you had an election with ranked choice voting, then you would need to modify the script to add up the total votes by candidate for only the first ranked choice and then divide that by the total number of votes. If a candidate gets more than 50% of the vote, then you could declare a winner. If not, you would need the script to eliminate the candidate with the lowest amount of votes and pull in their second choices before re-running the votes per candidate and percentages. Check if any candidate has a majority over 50% and repeat if necessary.
+This election audit successfully demonstrated a workable Python script that can read tabulated vote data from a CSV and print an analysis to a text file. The output includes results for total votes and vote percentage by candidate and county, as well as the winning candidate and the county with the largest voter turnout. (Note: for this analysis, voter turnout is defined by absolute number of voters per county - not number of votes compared to the eligble voter population.) This script could be used for any election with slight modifications to fit the scenario, like the two options described below:
+
+ 1. If you want to use this script for a national election, like the result of the popular vote for the presidential election, then you would want to modify the script to analyze turnout results by state instead of by county. The candidate calculations could stay the same, but the current script would yield too many county results that wouldn't be meaningful to the results for a national election like state would. You would not only need to modify your script, but would also need to ensure that the CSV file has state information for each vote. (The script could also be modified to calcuate the electoral college impact based on results by state, but that would require more changes.)
+
+ 2. If you had an election with ranked choice voting, then you would need to modify the script to add up the total votes by candidate for the first ranked choice and then divide that by the total number of votes. Add an if statement to determine if a candidate received more than 50% of the vote, which would make them the winner if so. If not, you would need the script to eliminate the candidate with the lowest amount of votes and pull in the second choices for the voters that ranked the eliminated candidate first before re-running the votes/percentages for the remaining candidates. Use the if statement again to check if any candidate has a majority over 50% and repeat if necessary until a winner is declared.
